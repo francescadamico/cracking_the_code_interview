@@ -2,6 +2,44 @@
 Imagine a robot sitting on the upper left corner of a grid with r rows and c columns. The robot can only move in two directions, right and down, but certain cells are "off limits" such that the robot cannot step on them. Design an algorithm to find a path for the robot from the top left to the bottom right
 '''
 
+class Maze:
+  def __init__(self, m, row=0, col=0):
+    self._inner = m
+    self._rows = len(m)
+    self._row = row
+    self._cols = len(m[0])
+    self._col = col
+   
+  def sub_maze_right(self):
+    return Maze(m, row, col + 1)
+
+  def sub_maze_down(self):
+    return Maze(m, row + 1, col) 
+  
+  def get(self, row, col):
+    r = row + self._row
+    c = col + self._col
+    if r >= self._rows || c >= self._cols:
+      return "X"
+    return self._inner[row + self._row][col + self._col]
+  
+  def just_one_cell(self):
+    return (self._cols - self._col == 1) and (self._rows - self._row == 1)
+
+
+def solution(maze):
+  if maze.just_one_cell():
+    return []
+  if maze.get(0, 1) != "X":
+    s = solution(maze.sub_maze_right())
+    if s is not None:
+      return ["right"] + s
+  if maze.get(1, 0) != "X":
+    s = solution(maze.sub_maze_down())
+    if s is not None:
+      return ["down"] + s
+  return None
+
 
 def go_left(maze):  
   if len(maze[0]) > 1:  
