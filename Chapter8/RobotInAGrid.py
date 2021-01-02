@@ -11,11 +11,20 @@ def go_up(maze):
   if len(maze) > 1:
     return maze[-2][-1]
 
+"""
+WOW: A function that return boolean or maze.... that's crazy.
+If you want describe a no return use None.
+"""
 def left_or_up(maze, steps):
   left = go_left(maze)
   if left == 'o':
     steps.append('left')
     # eliminate column
+    """
+    WTF!!!!!!
+    DON'T USE LIST COMPREHENSION TO WORK LIKE A FOR IN A SIDE EFFECT.
+    Use method name instead of comment to describe what you want to do
+    """
     [row.pop(-1) for row in maze]   
     return maze 
   up = go_up(maze)     
@@ -29,6 +38,8 @@ def left_or_up(maze, steps):
 
 
 def get_out(maze, steps):
+  """Use if guard is better than if else schema."""
+  
   if len(maze) <= 1 and len(maze[0]) <= 1:
     return steps
   else: 
