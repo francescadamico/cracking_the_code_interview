@@ -39,15 +39,12 @@ def left_or_up(maze, steps):
 
 def get_out(maze, steps):
   """Use if guard is better than if else schema."""
-  
   if len(maze) <= 1 and len(maze[0]) <= 1:
     return steps
-  else: 
-    new_maze = left_or_up(maze, steps)
-    if new_maze == False:
-      return 0
-    else:
-      return get_out(new_maze, steps)
+  new_maze = left_or_up(maze, steps)
+  if not new_maze:
+    return []
+  return get_out(new_maze, steps)
 
 steps = []
 
