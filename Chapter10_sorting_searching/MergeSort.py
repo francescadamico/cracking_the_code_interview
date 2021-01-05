@@ -27,9 +27,9 @@ def merge(A, help_A, low, middle, high):
     current += 1
 
   rest = middle - help_left
-  for i in range(rest + 1):
-    A[current + i] = help_A[help_left + i]
-    print(A[current + i])
+
+  A[current : current + rest +1] = help_A[help_left : middle + 1]
+
   return A 
 
 to_sort = [5, 7, 3, 9, 9, 10, 4]
