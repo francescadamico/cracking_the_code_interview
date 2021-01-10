@@ -9,37 +9,27 @@ class matrix:
     self.cols = [[M[i][j] for i in range(len(M[0]))] for j in range(len(M))] 
     self.diag = [[M[i][i] for i in range(len(M))], [M[j][len(M[0])-1-j] for j in range(len(M))]]
 
-def last_col_win(M, n):
+def line_win(line):
+  if line[0] == '': 
+    return False
   i = 0
-  while i < len(M.cols[n]) - 1:
-    if M.cols[n][i] != M.cols[n][i + 1]:
+  while i < len(line) - 1:
+    if line[i] != line[i + 1]:
       return False
     i += 1
   return True
+
+def last_col_win(M, n):
+  return line_win(M.cols[n])
 
 def last_row_win(M, n):
-  i = 0
-  while i < len(M.rows[n]) - 1:
-    if M.rows[n][i] != M.rows[n][i + 1]:
-      return False
-    i += 1
-  return True
+  return line_win(M.rows[n])
 
 def princ_diag_win(M):
-  i = 0
-  while i < len(M.rows[0]) -1:
-    if M.diag[0][i] != M.diag[0][i + 1]:
-      return False
-    i += 1
-  return True 
+  return line_win(M.diag[0])
 
 def last_diag_win(M):
-  i = 0
-  while i < len(M.rows[0]) - 1:
-    if M.diag[1][i] != M.diag[1][i + 1]:
-      return False
-    i += 1
-  return True
+  return line_win(M.diag[1])
 
 def tt_win(M, n, w):
 
@@ -63,12 +53,9 @@ def tic_tac_win(M):
   
   win_lines = []
   win_lines = tt_win(M, len(M.rows) - 1, win_lines)
-  # check principal diagonal
-  # if win_lines == []:
+
   if princ_diag_win(M):
     win_lines.append(M.diag[0])
-  # check last diagonal
-  # if win_lines == []:
   if last_diag_win(M):
     win_lines.append(M.diag[1])
 
@@ -76,9 +63,9 @@ def tic_tac_win(M):
   
 tic_tac_matrix = [
   ['X', 'X', 'O', 'X'],
-  ['O', 'O', 'X', 'O'],
-  ['X', 'X', 'O', 'X'],
-  ['X', 'O', 'O', 'X']]
+  ['O', '', 'X', 'X'],
+  ['X', 'X', '', 'X'],
+  ['X', 'X', 'O', 'X']]
 
 test_M = matrix(tic_tac_matrix)
 print(tic_tac_win(test_M))
