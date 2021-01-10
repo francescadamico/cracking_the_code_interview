@@ -1,6 +1,6 @@
 '''
 Design an algorithm to figure out if someone has won a game of tic-tac-toe.
-Extend it to NxN table.
+Extend it to NxN
 '''
 
 class matrix:
@@ -57,8 +57,6 @@ def tt_win(M, n, w):
   if last_row_win(M, n):
     w.append(M.rows[n])
 
-
-
   return w
 
 def tic_tac_win(M):
@@ -74,11 +72,12 @@ def tic_tac_win(M):
   if last_diag_win(M):
     win_lines.append(M.diag[1])
 
+  return win_lines    
   
 tic_tac_matrix = [
   ['X', 'X', 'O', 'X'],
-  ['O', 'X', 'X', 'O'],
-  ['X', 'X', 'X', 'X'],
+  ['O', 'O', 'X', 'O'],
+  ['X', 'X', 'O', 'X'],
   ['X', 'O', 'O', 'X']]
 
 test_M = matrix(tic_tac_matrix)
