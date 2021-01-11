@@ -11,6 +11,7 @@ def create_decimals(d):
 
 def create_eng_num_dic():
 	d = {
+    0: '',
 		1: 'one',
 		2: 'two',
 		3: 'three',
@@ -51,37 +52,48 @@ def un_dec(n_str, d):
 
 def translate(n_str, d):
 
-	if len(n_str) == 1:
-		out =	str(d[int(n_str[0])])
-	if len(n_str) > 1:
-		out = un_dec(n_str[1:], d)
-	if len(n_str) == 3:
-		out = d[int(n_str[0])] + ' hundred ' + out
+  if len(n_str) == 1:
+    out =	str(d[int(n_str[0])])
+  if len(n_str) > 1:
+    out = un_dec(n_str[1:], d)
+  if len(n_str) == 3:
+    if int(n_str[0]) == 0:
+      out = out
+    else:
+      out = d[int(n_str[0])] + ' hundred ' + out
 
-	return out
+  return out
 
 		
 def eng_int(n):
 
-	d = create_eng_num_dic()
-	n_str = str(n)
-	n_digit = len(n_str)		
+  d = create_eng_num_dic()
+  n_str = str(n)
+  n_digit = len(n_str)		
 
-	if n_digit > 3:
-		dig = 3
-	else:
-		dig = n_dig
-	out_str = translate(n_str[-dig:], d) # hundred
+  if n_digit > 3:
+    dig = 3
+  else:
+    dig = n_digit
+  out_str = translate(n_str[-dig:], d) # hundred
 
-	if n_digit > 3:
-		out_str = translate(n_str[-n_digit:-3], d) + ' thousand ' + out_str # thousand
+  if n_digit > 3:
+    if n_digit > 6:
+      dig = 6
+    else:
+      dig = n_digit
+    out_str = translate(n_str[-dig:-3], d) + ' thousand ' + out_str # thousand
+  
+  if n_digit > 6:
+    if n_digit > 9:
+      dig = 9
+    else:
+      dig = n_digit
+    out_str = translate(n_str[-dig:-6], d) + ' million ' + out_str # million
 
-	if n_digit > 6:
-		out_str = translate(n_str[-n_digit:-6], d) + ' million ' + out_str # million
+  return out_str
 
-	return out_str
-
-print(eng_int(123456))
+print(eng_int(100030000))
 	
 	
 	
