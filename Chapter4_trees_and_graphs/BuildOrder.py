@@ -35,9 +35,8 @@ def create_order(p_dict, ordered_list = []):
   if len(ordered_list) == temp_count:
     return -1
   clean_p_dict = pop_proj_dep(p_dict, ordered_list)  
-  ordered_list = create_order(clean_p_dict, ordered_list)  
-  
-  return ordered_list
+  return create_order(clean_p_dict, ordered_list)  
+
 
 def build_order(p, p_dep):
   
