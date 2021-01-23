@@ -1,29 +1,32 @@
 
-def quick_sort(A):
-  return quick_sort_int(A, 0, len(A)-1)
+def partition(arr, low, high):
+  
+  i = low - 1
+  pi = arr[high]
 
-def quick_sort_int(A, left, right):
-  index = partition(A, left, right)
-  if left < index - 1: # quick sort left part
-    quick_sort_int(A, left, index-1)
-  if right > index:
-    quick_sort_int(A, index, right)
-  return A
+  for j in range(low, high):
+    if arr[j] < pi:
+      i = i + 1
+      arr[i], arr[j] = arr[j], arr[i]
+  
+  arr[i+1], arr[high] = arr[high], arr[i+1]
 
-def partition(A, left, right):
-  pivot = A[left + int((right-left)/2)]
-  print(pivot)
-  while left <= right:
-    while A[left] < pivot:
-      left += 1
-    while A[right] > pivot:
-      right -= 1
-    if left <= right:
-      A[left], A[right] = A[right], A[left]
-      left += 1
-      right -= 1
-  return left
+  return i+1
 
-to_sort = [5, 7, 3, 9, 9, 10, 4]
-sort = quick_sort(to_sort)
-print('sort = ', str(sort))  
+
+def quick_sort(arr, low, high):
+  if len(arr) == 1:
+    return arr
+
+  if low < high:
+  
+    pivot = partition(arr, low, high)
+
+    quick_sort(arr, low, pivot - 1)
+    quick_sort(arr, pivot + 1, high)
+  
+
+
+A = [5, 3, 8, 1, 34, 65]
+quick_sort(A, 0, len(A)-1)
+print(A)
