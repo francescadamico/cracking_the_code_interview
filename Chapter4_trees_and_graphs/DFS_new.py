@@ -11,14 +11,17 @@ def visit_node(node):
   return node
 
 
-def DFS(node, visited_nodes = []):
-  if node == None:
-    return
-  if node not in visited_nodes:
-    for n in node.children:    
-      visited_nodes = DFS(n, visited_nodes)
-    visited_nodes.append(visit_node(node))
-  return visited_nodes
+def DFS(node, visited_nodes = None):
+  if visited_nodes is None:
+    visited_nodes = {}
+  if node is None or node in visited_nodes:
+    return []
+  dfs = []
+  visited_nodes.add(node)
+  for n in node.children:    
+    dfs += DFS(n, visited_nodes)
+  dfs += [visit_node(node)]
+  return dfs
 
 
 
