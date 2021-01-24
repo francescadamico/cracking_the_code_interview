@@ -8,6 +8,23 @@ class Node:
     self.right = None
     self.left = None
     self.parent = None
+    
+  def anchestors(self):
+    anchestors = []
+    node = self
+    while node:
+      anchestors.append(node)
+      node = node.parent
+    return anchestors
+  
+  def first_common(self, other):
+    other_anchestors = set(other.anchestors())
+    node = self
+    while node:
+      if node in other_anchestors:
+        return node
+      node = node.parent
+    return None
 
 def find_level(a, level = 1):
 
