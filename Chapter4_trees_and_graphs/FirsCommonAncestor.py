@@ -8,6 +8,21 @@ class Node:
     self.right = None
     self.left = None
     self.parent = None
+    
+  def ancestors(self):
+    node = self
+    ancestors = []
+    while node is not None:
+      ancestors.append(node)
+      node = node.parent
+    return ancestors
+  
+  def first_common_ancestor(self, other):
+    other_ancestors = set(other.ancestors())
+    node = self
+    while node is not None or node not in other_ancestors:
+      node = node.parent
+    return node  
 
 def find_level(a, level = 1):
 
@@ -88,3 +103,4 @@ n7.parent = n3
 
 
 print(common_ancestor(n4, n7).data)
+print(n4.first_common_ancestor(n7).data)
