@@ -15,7 +15,9 @@ def find_line(p1, p2):
   
   x1, y1 = p1[0], p1[1]
   x2, y2 = p2[0], p2[1]
-  
+  """
+  Mybe you'll hit some problems when two points with the same abscis: division by zero.
+  """
   m = (y2 - y1) / (x2 - x1)
   c = y1 - m * x1
 
@@ -30,6 +32,9 @@ def best_line(points):
   while i < len(points) - 1:
     for np in points[i+1 : ]:
       m, c = find_line(points[i], np)
+      """
+      Pay attention to flotting point rounding
+      """
       lines[m, c] += 1
       if lines[m, c] > lines[max_line]:
         max_line = m, c
