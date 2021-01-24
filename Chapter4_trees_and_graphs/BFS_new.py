@@ -8,6 +8,28 @@ class Node:
 def visit(n):
   return n.data
 
+def BFS2(root):
+  from collections import dequeue
+  bfs = []
+  stack = dequeue([root])
+  visited = {}
+  while stack:
+    node = stack.popleft()
+    visited.add(node)
+    bfs.append(node)
+    stack.extend([n for n in node.adj if n not in visited])
+  return bfs
+
+def recursive_BFS(root, visited = None):
+  if visited is None:
+    visited = {}
+  visited.add(root)
+  bfs = [root]
+  for node in root.adj:
+    if node not in visited:
+      bfs.etend(recursive_BFS(node, visited)
+  return bfs
+
 def BFS(n):
   level = {n: 0}
   i = 1
