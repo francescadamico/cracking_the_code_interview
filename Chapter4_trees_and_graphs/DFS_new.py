@@ -15,9 +15,9 @@ def DFS(node, visited_nodes = []):
   if node == None:
     return
   if node not in visited_nodes:
-    visited_nodes.append(visit_node(node))
     for n in node.children:    
       visited_nodes = DFS(n, visited_nodes)
+    visited_nodes.append(visit_node(node))
   return visited_nodes
 
 
