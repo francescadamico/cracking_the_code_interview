@@ -46,4 +46,3 @@ print(group_anagram(test))
 print(group_anagram(test) == ['fra', 'arf', 'raf', 'bla', 'lab', 'etc'])
 
 
-
