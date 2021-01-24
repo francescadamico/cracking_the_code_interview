@@ -40,4 +40,3 @@ for i in nodes_order:
   print(i.data)
   
 
-
