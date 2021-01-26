@@ -15,6 +15,14 @@ def most_populated(P):
 	d = defaultdict(int)
 	most_pop = (1900, 0)
 	
+	"""
+	Split responsabilities and make it more pythonic:
+	for p in P:
+	    for y in range(p.birth, p.death + 1):
+                d[y] += 1
+	return max(d, key=d.get)
+	"""
+	
 	for p in P:
 		for y in range(p.birth, p.death + 1):		
 			d[y] += 1

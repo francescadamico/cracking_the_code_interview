@@ -22,12 +22,20 @@ def pop_proj_dep(p_dict, ordered_list):
 
   return p_dict
 
+"""
+Celaver algorithm (and maybe sloow): What you really need is ad DFS where you
+must check the cycles: when you find a cycle just raise error if you haven't 
+compiled your dependency yet.
+"""
 def create_order(p_dict, ordered_list = []):
   
   temp_count = len(ordered_list)
 
   if len(p_dict) == len(ordered_list):
     return ordered_list
+  """ Better:
+  ordered_list.extend([k for k, deps in p_dict if not deps and k not in ordered_list])
+  """
   for k in p_dict:
     if p_dict[k] == []:
       if k not in ordered_list:
