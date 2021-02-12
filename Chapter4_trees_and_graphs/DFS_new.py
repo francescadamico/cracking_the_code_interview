@@ -1,57 +1,38 @@
+def visit_node(n):
+	return n*2
 
-class Node:
-  def __init__(self, data):
-    self.data = data
-    self.adj = []
+def DFS_visit(N, n, visited_nodes, DFS):
+  for v in N[n]:
+    if v not in visited_nodes:
+      visited_nodes.add(v)
+      DFS += [visit_node(v)]
+      DFS_visit(N, v, visited_nodes, DFS)
+			
 
-'''
-this function defines what has to be done with the node being visited: it is the one that has to be used to make the desired operation on the visited node
-'''
-def visit_node(node):
-  return node.data
-
-
-def DFS_visit(n, dfs, visited_nodes):
-    
-  for v in n.adj:
-    if v not in visited_nodes:  
-      visited_nodes.add(v)       
-      DFS_visit(v, dfs, visited_nodes) 
-      dfs += [visit_node(v)]
 
 def DFS(N):
-  
-  dfs = []
   visited_nodes = set()
-  for n in N:
+  DFS = []
+  for n in N.keys():
     if n not in visited_nodes:
       visited_nodes.add(n)
-      DFS_visit(n, dfs, visited_nodes)
-      dfs += [visit_node(n)]
+      DFS += [visit_node(n)]
+      DFS_visit(N, n, visited_nodes, DFS)
       
-  return dfs
+  
+  return DFS
 
-R = Node(1)
 
-T = Node(8)
 
-N1 = Node(2)
-N2 = Node(3)
-N3 = Node(4)
-N4 = Node(5)
-N5 = Node(6)
+N = {
+'a':['b', 'e'],
+'b':['c', 'd'],
+'c':[],
+'d':['e'],
+'e':[],
+'f':[]
+}
 
-R.adj = [N1] 
-N1.adj = [N2, N4, N5]
-N2.adj = [N3]
-
-N4.adj = [N2, N3, T]
-
-T.adj = [N2]
-
-nodes = [R,T, N1, N2, N3, N4]
-nodes_order = DFS(nodes)
-
-print(nodes_order)
+print(DFS(N))
 
 
